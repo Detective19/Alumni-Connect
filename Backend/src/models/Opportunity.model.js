@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const OpportunitySchema = new mongoose.Schema({
     company_name: String,
@@ -7,6 +7,8 @@ const OpportunitySchema = new mongoose.Schema({
     description: String,
     type: String,
     salary: String
-})
+}, { timestamps: true });
 
-module.exports = mongoose.model("Opportunity", OpportunitySchema);
+const Opportunity = mongoose.model("Opportunity", OpportunitySchema);
+
+export default Opportunity;

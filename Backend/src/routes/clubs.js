@@ -1,6 +1,7 @@
-const express = require("express");
+import express from "express";
+import Clubs from "../models/Clubs.model.js";
+
 const router = express.Router();
-const Clubs = require("../DataBase/Models/Clubs.model");
 
 // Get all clubs
 router.get("/", async (req, res) => {
@@ -25,4 +26,4 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
