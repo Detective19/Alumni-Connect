@@ -26,7 +26,23 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(formData);
+
+    // Clean up form data - remove empty strings and convert batch to number
+    const cleanedData = {
+      fullName: formData.fullName,
+      email: formData.email,
+      password: formData.password,
+      ...(formData.batch && { batch: parseInt(formData.batch) }),
+      ...(formData.role && { role: formData.role }),
+      ...(formData.cur_role && { cur_role: formData.cur_role }),
+      ...(formData.company && { company: formData.company }),
+      ...(formData.location && { location: formData.location }),
+    };
+
+    const success = await signup(cleanedData);
+    if (success) {
+      navigate('/');
+    }
   };
 
   return (
@@ -54,6 +70,7 @@ export default function Signup() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="John Doe"
+              autoComplete="name"
             />
           </div>
 
@@ -73,6 +90,7 @@ export default function Signup() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="you@example.com"
+              autoComplete="email"
             />
           </div>
 
@@ -92,6 +110,7 @@ export default function Signup() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
 
@@ -106,11 +125,11 @@ export default function Signup() {
               id="batch"
               name="batch"
               type="number"
-              required
               value={formData.batch}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="2020"
+              autoComplete="off"
             />
           </div>
 
@@ -124,12 +143,12 @@ export default function Signup() {
             <select
               id="role"
               name="role"
-              required
               value={formData.role}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+              autoComplete="off"
             >
-              <option value="">Select role</option>
+              <option value="">Select role (optional)</option>
               <option value="student">Student</option>
               <option value="alumni">Alumni</option>
             </select>
@@ -150,6 +169,7 @@ export default function Signup() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="Software Engineer"
+              autoComplete="organization-title"
             />
           </div>
 
@@ -168,6 +188,7 @@ export default function Signup() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="Tech Corp"
+              autoComplete="organization"
             />
           </div>
 
@@ -186,6 +207,7 @@ export default function Signup() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="San Francisco, CA"
+              autoComplete="address-level2"
             />
           </div>
 
