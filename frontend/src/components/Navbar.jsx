@@ -1,9 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
 import { LogOut, GraduationCap } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuthStore } from '../store/useAuthStore';
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { authUser: user, logout } = useAuthStore();
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
@@ -30,41 +30,37 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-1 ml-auto mr-6">
             <Link
               to="/"
-              className={`px-3 py-2 rounded-lg transition-all ${
-                isActive('/')
-                  ? 'bg-blue-50 text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:bg-gray-50'
-              }`}
+              className={`px-3 py-2 rounded-lg transition-all ${isActive('/')
+                ? 'bg-blue-50 text-blue-600 font-semibold'
+                : 'text-gray-700 hover:bg-gray-50'
+                }`}
             >
               Home
             </Link>
             <Link
               to="/opportunities"
-              className={`px-3 py-2 rounded-lg transition-all ${
-                isActive('/opportunities')
-                  ? 'bg-blue-50 text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:bg-gray-50'
-              }`}
+              className={`px-3 py-2 rounded-lg transition-all ${isActive('/opportunities')
+                ? 'bg-blue-50 text-blue-600 font-semibold'
+                : 'text-gray-700 hover:bg-gray-50'
+                }`}
             >
               Opportunities
             </Link>
             <Link
               to="/clubs-culture"
-              className={`px-3 py-2 rounded-lg transition-all ${
-                isActive('/clubs-culture')
-                  ? 'bg-blue-50 text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:bg-gray-50'
-              }`}
+              className={`px-3 py-2 rounded-lg transition-all ${isActive('/clubs-culture')
+                ? 'bg-blue-50 text-blue-600 font-semibold'
+                : 'text-gray-700 hover:bg-gray-50'
+                }`}
             >
               Clubs & Culture
             </Link>
             <Link
               to="/connect"
-              className={`px-3 py-2 rounded-lg transition-all ${
-                isActive('/connect')
-                  ? 'bg-blue-50 text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:bg-gray-50'
-              }`}
+              className={`px-3 py-2 rounded-lg transition-all ${isActive('/connect')
+                ? 'bg-blue-50 text-blue-600 font-semibold'
+                : 'text-gray-700 hover:bg-gray-50'
+                }`}
             >
               Connect
             </Link>
@@ -80,11 +76,11 @@ export default function Navbar() {
                 >
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
                     <span className="text-white font-semibold text-sm">
-                      {user.name.charAt(0).toUpperCase()}
+                      {user.fullName.charAt(0).toUpperCase()}
                     </span>
                   </div>
                   <span className="text-sm font-medium text-gray-700 hidden lg:inline">
-                    {user.name.split(' ')[0]}
+                    {user.fullName.split(' ')[0]}
                   </span>
                 </Link>
                 <button
@@ -112,7 +108,7 @@ export default function Navbar() {
                 <Link to="/profile">
                   <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md">
                     <span className="text-white font-semibold text-xs">
-                      {user.name.charAt(0).toUpperCase()}
+                      {user.fullName.charAt(0).toUpperCase()}
                     </span>
                   </div>
                 </Link>

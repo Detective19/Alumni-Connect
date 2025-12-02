@@ -1,25 +1,28 @@
+
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuthStore } from '../store/useAuthStore';
+import ProfileHeader from '../components/ProfileHeader';
 import {
-  User,
   Mail,
   Briefcase,
   MapPin,
   Calendar,
+  Building,
   Edit2,
   Save,
   X,
   Image as ImageIcon,
+  User,
   Users,
 } from 'lucide-react';
 
 export default function Profile() {
-  const { user, updateProfile } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
+  const { authUser: user, updateProfile } = useAuthStore();
 
   const [formData, setFormData] = useState({
-    name: user?.name || '',
+    name: user?.fullName || '',
     email: user?.email || '',
     batch: user?.batch || '',
     company: user?.company || '',
@@ -90,7 +93,7 @@ export default function Profile() {
                 </div>
 
                 <div>
-                  <h1 className="text-3xl font-bold text-white">{user.name}</h1>
+                  <h1 className="text-3xl font-bold text-white">{user.fullName}</h1>
                   <p className="text-blue-100 mt-1">{user.role}</p>
                 </div>
               </div>
@@ -160,7 +163,7 @@ export default function Profile() {
 
                 {/* DISPLAY FIELDS */}
                 {[
-                  { label: "Full Name", icon: User, value: user.name },
+                  { label: "Full Name", icon: User, value: user.fullName },
                   { label: "Email", icon: Mail, value: user.email },
                   { label: "Batch", icon: Calendar, value: user.batch },
                   { label: "Current Job / Company", icon: Briefcase, value: user.company },

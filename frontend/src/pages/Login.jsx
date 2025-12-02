@@ -37,6 +37,7 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="you@example.com"
+              autoComplete="email"
             />
           </div>
 
@@ -55,6 +56,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
               placeholder="••••••••"
+              autoComplete="current-password"
             />
           </div>
 
